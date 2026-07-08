@@ -1,9 +1,6 @@
 package service;
 
-import model.Customer;
-import model.MenuItem;
-import model.Order;
-import model.Restaurant;
+import model.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -77,6 +74,19 @@ public class FoodDeliveryService {
         return null;
     }
 
+    public void updateOrderStatus(int orderId, OrderStatus status) {
+
+        Order order = findOrderById(orderId);
+
+        if (order == null) {
+            System.out.println("Order Not Found.");
+            return;
+        }
+
+        order.setStatus(status);
+
+        System.out.println("Order Status Updated Successfully.");
+    }
 
 
 

@@ -9,14 +9,16 @@ public class Order {
     private List<MenuItem> ordered_item;
     private Customer customer;
     private double total_amount;
+    private OrderStatus status;
 
 
-    public Order(int order_id, Restaurant restaurant, List<MenuItem> ordered_item, Customer customer, double total_amount) {
+    public Order(int order_id, Restaurant restaurant, List<MenuItem> ordered_item, Customer customer, double total_amount, OrderStatus status) {
         this.order_id = order_id;
         this.restaurant = restaurant;
         this.ordered_item = ordered_item;
         this.customer = customer;
         this.total_amount = total_amount;
+        this.status = status;
     }
 
     public int getOrder_id() {
@@ -59,7 +61,16 @@ public class Order {
         this.total_amount = total_amount;
     }
 
+
+    public OrderStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(OrderStatus status) {
+        this.status = status;
+    }
+
     public String toString(){
-        return this.order_id+ " " + this.restaurant + " " + this.ordered_item + " " + this.customer + " " + this.total_amount;
+        return this.order_id+ " " + this.restaurant + " " + this.ordered_item + " " + this.customer + " " + this.total_amount+ " " + this.status;
     }
 }

@@ -1,7 +1,4 @@
-import model.Customer;
-import model.MenuItem;
-import model.Order;
-import model.Restaurant;
+import model.*;
 import service.FoodDeliveryService;
 
 import java.util.ArrayList;
@@ -21,7 +18,8 @@ class Main{
         System.out.println("3. Add Menu Items");
         System.out.println("4. place Order");
         System.out.println("5. View Order");
-        System.out.println("6. Exit");
+        System.out.println("6. Update Order Status");
+        System.out.println("7. Exit");
     }
 
     public static void addCustomer(){
@@ -109,7 +107,8 @@ class Main{
                 restaurant,
                 orderedItems,
                 customer,
-                totalAmount
+                totalAmount,
+                OrderStatus.ORDER_PLACED
         );
 
         service.addOrder(order);
@@ -132,6 +131,45 @@ class Main{
         System.out.println(order);
     }
 
+    public static void updateOrderStatus() {
+
+        System.out.println("Enter Order Id:");
+        int orderId = sc.nextInt();
+
+        System.out.println("Select Status");
+        System.out.println("1. ORDER_PLACED");
+        System.out.println("2. PREPARING");
+        System.out.println("3. OUT_FOR_DELIVERY");
+        System.out.println("4. DELIVERED");
+        System.out.println("5. CANCELLED");
+
+        int choice = sc.nextInt();
+
+        OrderStatus status;
+
+        switch (choice) {
+            case 1:
+                status = OrderStatus.ORDER_PLACED;
+                break;
+            case 2:
+                status = OrderStatus.PREPARING;
+                break;
+            case 3:
+                status = OrderStatus.OUT_FOR_DELIVERY;
+                break;
+            case 4:
+                status = OrderStatus.DELIVERED;
+                break;
+            case 5:
+                status = OrderStatus.CANCELLED;
+                break;
+            default:
+                System.out.println("Invalid Status.");
+                return;
+        }
+
+        service.updateOrderStatus(orderId, status);
+    }
 
 
 
@@ -163,6 +201,10 @@ class Main{
                     viewOrder();
                     break;
                 case 6:
+                    updateOrderStatus();
+                    break;
+
+                case 7:
                     running = false;
                     System.out.println("Thank You for using Food Delivery System!");
                     break;
